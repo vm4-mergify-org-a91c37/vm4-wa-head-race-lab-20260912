@@ -35,19 +35,19 @@ jobs:
           labels1=$(seq -w 1 100 | jq -Rsc 'split("\n")[:-1] | map("vm4-label-" + .) | {labels:.}')
           labels2=$(seq 101 105 | jq -Rsc 'split("\n")[:-1] | map("vm4-label-" + .) | {labels:.}')
           for labels in "$labels1" "$labels2"; do
-            curl --fail-with-body -sS \
+            curl --fail-with-body -sS --retry 5 --retry-all-errors --retry-delay 1 \
               -X POST \
               -H "Authorization: Bearer ${GH_TOKEN}" \
               -H 'Accept: application/vnd.github+json' \
               -H 'X-GitHub-Api-Version: 2022-11-28' \
               "${api}/issues/${PR}/labels" --data-binary "$labels" >/dev/null
           done
-          p1=$(curl --fail-with-body -sS \
+          p1=$(curl --fail-with-body -sS --retry 5 --retry-all-errors --retry-delay 1 \
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H 'Accept: application/vnd.github+json' \
             -H 'X-GitHub-Api-Version: 2022-11-28' \
             "${api}/issues/${PR}/labels?per_page=100&page=1")
-          p2=$(curl --fail-with-body -sS \
+          p2=$(curl --fail-with-body -sS --retry 5 --retry-all-errors --retry-delay 1 \
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H 'Accept: application/vnd.github+json' \
             -H 'X-GitHub-Api-Version: 2022-11-28' \
