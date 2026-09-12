@@ -1,0 +1,11 @@
+pull_request_rules:
+  - name: vm4 direct merge review invalidation probe
+    conditions:
+      - title = VM4_WA_REVIEW_TOCTOU_20260912
+      - files = review-toctou.txt
+      - "#files = 1"
+      - approved-reviews-by = livastic-vm4-secondary-20260911
+      - check-success = @github-actions/review-hold
+    actions:
+      merge:
+        method: squash
