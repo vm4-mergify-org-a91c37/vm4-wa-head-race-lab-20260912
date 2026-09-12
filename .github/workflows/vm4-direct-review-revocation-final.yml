@@ -1,0 +1,16 @@
+name: VM4 Direct Review Revocation Final
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  review-revocation-hold:
+    name: review-revocation-hold
+    if: github.event.pull_request.title == 'VM4_WA_REVIEW_REVOCATION_FINAL_20260912'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hold direct merge finalization window
+        run: sleep 180
+      - name: Complete trusted check
+        run: echo 'review-revocation-hold complete'

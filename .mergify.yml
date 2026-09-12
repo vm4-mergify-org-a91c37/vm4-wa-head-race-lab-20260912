@@ -1,0 +1,11 @@
+pull_request_rules:
+  - name: vm4 direct merge review revocation final probe
+    conditions:
+      - title = VM4_WA_REVIEW_REVOCATION_FINAL_20260912
+      - files = review-revocation-final.txt
+      - "#files = 1"
+      - approved-reviews-by = livastic-vm4-secondary-20260911
+      - check-success = @github-actions/review-revocation-hold
+    actions:
+      merge:
+        method: squash
