@@ -5,12 +5,12 @@ on:
 permissions:
   contents: read
 jobs:
-  review-hold:
-    name: review-hold
-    if: github.event.pull_request.title == 'VM4_WA_REVIEW_TOCTOU_20260912'
+  review-hold-long:
+    name: review-hold-long
+    if: github.event.pull_request.title == 'VM4_WA_REVIEW_TOCTOU_LONG_20260912'
     runs-on: ubuntu-latest
     steps:
       - name: Hold merge finalization window
-        run: sleep 45
+        run: sleep 180
       - name: Complete trusted check
-        run: echo 'review-hold complete'
+        run: echo 'review-hold-long complete'
