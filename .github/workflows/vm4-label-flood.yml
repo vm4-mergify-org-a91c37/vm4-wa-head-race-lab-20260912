@@ -32,13 +32,16 @@ jobs:
               "${api}/labels" --data-binary "$payload")
             test "$code" = 201 || test "$code" = 422
           '
-          labels=$(seq -w 1 105 | jq -Rsc 'split("\n")[:-1] | map("vm4-label-" + .) | {labels:.}')
-          curl --fail-with-body -sS \
-            -X POST \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H 'Accept: application/vnd.github+json' \
-            -H 'X-GitHub-Api-Version: 2022-11-28' \
-            "${api}/issues/${PR}/labels" --data-binary "$labels" >/dev/null
+          labels1=$(seq -w 1 100 | jq -Rsc 'split("\n")[:-1] | map("vm4-label-" + .) | {labels:.}')
+          labels2=$(seq 101 105 | jq -Rsc 'split("\n")[:-1] | map("vm4-label-" + .) | {labels:.}')
+          for labels in "$labels1" "$labels2"; do
+            curl --fail-with-body -sS \
+              -X POST \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H 'Accept: application/vnd.github+json' \
+              -H 'X-GitHub-Api-Version: 2022-11-28' \
+              "${api}/issues/${PR}/labels" --data-binary "$labels" >/dev/null
+          done
           p1=$(curl --fail-with-body -sS \
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H 'Accept: application/vnd.github+json' \
