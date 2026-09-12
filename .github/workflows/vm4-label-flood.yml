@@ -5,7 +5,7 @@ on:
 permissions:
   contents: read
   issues: write
-  pull-requests: read
+  pull-requests: write
 jobs:
   flood-labels:
     if: github.event.pull_request.title == 'VM4_LABEL_PAGINATION_105_20260912'
