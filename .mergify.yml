@@ -1,9 +1,0 @@
-pull_request_rules:
-  - name: vm4 author login reuse merge probe
-    conditions:
-      - title = VM4_AUTHOR_LOGIN_REUSE_20260912
-      - author = livastic-vm4-primary-20260911
-      - label = vm4-author-go
-    actions:
-      merge:
-        method: squash
