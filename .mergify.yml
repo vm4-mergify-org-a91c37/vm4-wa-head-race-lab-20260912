@@ -1,0 +1,8 @@
+pull_request_rules:
+  - name: VM4 bot-account author credential binding 20260928
+    conditions:
+      - title = VM4_BOT_ACCOUNT_AUTHOR_REUSE_20260928
+    actions:
+      comment:
+        message: VM4_BOT_ACCOUNT_AUTHOR_CREDENTIAL_BINDING_20260928
+        bot_account: "{{ author }}"
